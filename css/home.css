@@ -2,11 +2,11 @@
 
 
 
-* {
+*, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-    font-style: initial;
+  font-style: initial;
 }
 
 
@@ -34,7 +34,6 @@ header.navbar {
   width: 100%;
   padding: 15px 60px;
   background-color: rgba(0, 0, 0, 0.3); 
-  color: white;
   z-index: 10;
   font-size: 20px;
 }
@@ -55,7 +54,7 @@ header.navbar {
 
 .menu a, .cadastro a {
   text-decoration: none;
-  color: white;
+  color: #d5e5f2;
   font-weight: 600;
   transition: 0.3s;
 }
@@ -66,45 +65,103 @@ header.navbar {
 
 .page {
   text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 8px;
 }
 
 .video button {
   position: absolute;
-  right: 140px; 
+  right: 90px; 
   bottom: 50px;
-  background-color: #03318C;
-  color: #ffff;
-  border: none;
-  padding: 15px 30px;
-  border-radius: 15px;
+  background: linear-gradient(135deg, #0288d1, #03a9f4, #81d4fa);
+  color: white;
+  border: 2px solid #00bcd4;
+  padding: 20px 60px;
+  border-radius: 50%; /* formato alongado tipo prancha */
   font-weight: 700;
-  transition: transform 0.3s;
-    font-size: 1.7rem;
-    width: fit-content;
-    height: fit-content;
-    display: inline-flex;
-    border-style: outset;
-    border-color: black;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0, 188, 212, 0.4)
 }
 
 .video button:hover {
   background-color: #8BBBD9;
-  color: #ffff;
-  transform: translateX(30px);
+  color: white;
+  transform: scale(1.1);
 }
 
 .paragrafo {
   position: absolute;
   right: 70px;
   bottom: 200px;
-  color: #fff;
-  font-size: 3rem; 
+  color: #d5e5f2;
+  font-size: 2.8rem; 
   font-weight: 800; 
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   max-width: 450px; 
   border: none;
-  border-radius: 30px;
   padding: 0; 
   z-index: 20;
   text-align: right; 
 }
+
+.historia {
+  background: linear-gradient(to bottom, #03318c, #0288d1); 
+  color: #ffffff;
+  margin-top: -5px;
+  padding: 80px 5% 80px 5%;
+  box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+}
+
+
+.historia h1 {
+  font-size: 2.5rem;
+  color: #ffffff;
+  text-shadow: 3px 6px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 700;
+  margin-bottom: -20px;
+}
+
+.container{
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+.container img{
+  width: 40%;
+  border-radius: 10%;
+  margin-left: 50px;
+  border-style: solid;
+  border-color: black;
+}
+
+.historia h2, h3 {
+  color: #e1f5fe;
+  margin-top: 30px;
+  font-weight: 700;
+  width: 100%;
+}
+
+
+.historia p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #f1f8ff;
+  margin-bottom: 20px;
+  text-align: left;
+  max-width: 700px;
+  margin-left: 0;
+}
+
+
+
+
