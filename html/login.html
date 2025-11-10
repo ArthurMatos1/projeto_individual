@@ -1,11 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../css/login.css">
 </head>
+
 <body>
-    
+
+    <header class="navbar">
+        <img src="../src/logo.png" alt="logo" class="logoheader">
+        <div class="menu">
+            <a href="home.html">
+                <p class="page">Início</p>
+            </a>
+            <a href="quiz.html">
+                <p>Quiz</p>
+            </a>
+            <a href="sobremim.html">
+                <p>Sobre mim</p>
+            </a>
+        </div>
+        <div class="cadastro">
+            <a href="login.html">
+                <p>Login</p>
+            </a>
+            <a href="cadastro.html">
+                <p class="cadastrar">Cadastro</p>
+            </a>
+        </div>
+    </header>
+
+    <div class="conteudo">
+        <img src="../src/otimo.jpg" alt="">
+
+        <div class="formulario">
+            <h2>Login</h2>
+
+            <p>Email</p>
+            <div class="campo">
+                <img src="../src/e-mail.png" alt="Ícone de e-mail" class="icone">
+                <input type="text" id="iptEmail" placeholder="Insira seu E-mail">
+            </div>
+
+            <p>Senha</p>
+            <div class="campo">
+                <img src="../src/cadeado.png" alt="Ícone de cadeado" class="icone">
+                <input type="password" id="iptSenha" placeholder="Insira a sua senha">
+            </div>
+            <div id="divSenha" class="senha"></div>
+            <a href="../html/cadastro.html" class="esqueci">Ainda não tem cadastro?</a>
+
+            <div class="botao c">
+                <button onclick="verificarTentativas()" class="botao">Entrar</button>
+            </div>
+
+        </div>
+    </div>
+    <footer class="rodape">
+        <div class="rodape_bordao">
+            <img src="../src/logo.png" alt="Logo Radar do Surf">
+            <p>Sinta a vibe, siga a onda</p>
+        </div>
+
+        <div class="rodape_links">
+            <a href="#">Início</a>
+            <a href="#">História</a>
+            <a href="#">Quiz</a>
+            <a href="#">Contato</a>
+        </div>
+
+        <div class="rodape_contato">
+            <p>📍 São Paulo - Brasil</p>
+            <p>📧 contato@radardosurf.com</p>
+        </div>
+    </footer>
 </body>
+
 </html>
