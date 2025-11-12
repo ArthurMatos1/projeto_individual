@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+
+
+*,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-style: initial;
+}
+
+
+header.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 60px;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    font-size: 20px;
+}
+
+.logoheader {
+    width: 90px;
+}
+
+.logoheader img {
+    width: 100px;
+}
+
+
+.menu,
+.cadastro {
+    display: flex;
+    gap: 25px;
+}
+
+.menu a,
+.cadastro a {
+    text-decoration: none;
+    color: #d5e5f2;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.menu a:hover,
+.cadastro a:hover {
+    color: #8BBBD9;
+}
+
+.rodape {
+    background: linear-gradient(135deg, #01579b, #0288d1);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 60px;
+    color: #e1f5fe;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
+}
+
+.rodape_bordao {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #c8e6ff;
+    max-width: 500px;
+}
+
+.rodape_bordao img {
+    width: 70%;
+
+}
+
+.rodape_links {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+    flex-direction: column;
+}
+
+.rodape_links a {
+    color: #e1f5fe;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.rodape_links a:hover {
+    color: #81d4fa;
+    text-decoration: underline;
+}
+
+.rodape_contato {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #bbdefb;
+}
+
+.rodape_contato p {
+    margin: 3px 0;
+}
+
+.cadastro {
+    display: flex;
+    justify-self: flex-end;
+    align-items: center;
+}
+
+.cadastro p {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.cadastrar {
+    color: #FFFFFF;
+    background-color: #4E5A65;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.c a :hover{
+    color: #FFFFFF;
+    background-color: #4E5A65;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.c button:hover{
+    background-color: #4E5A65;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border-color: #4E5A65;
+    font-weight: 900;
+}
