@@ -216,17 +216,16 @@ header.navbar {
     font-weight: 900;
     padding: 10px 20px;
     margin-top: 25px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     transition: 0.3s;
     align-self: center;
 }
 
 .formulario button:hover {
-    background-color: #4E5A65;
+    background-color: #01579b;
     color: #FFFFFF;
-    border-color: #4E5A65;
-    padding: 12px 22px;
-    font-size: 0.9rem;
+    padding: 10px 22px;
+    font-size: 1rem;
 }
 
 .esqueci {

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@300..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Original+Surfer&display=swap');
 
 *,
 body {
@@ -8,6 +8,8 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-style: initial;
+    font-family: "Fredoka", sans-serif;
+
 }
 
 
@@ -128,35 +130,86 @@ header.navbar {
 }
 
 
-.cadastro {
+.container {
+    width: 100%;
+    height: 100vh;
     display: flex;
-    justify-self: flex-end;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
 }
 
-.cadastro p {
-    margin-left: 20px;
-    margin-right: 20px;
+.container img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
 
-.cadastrar {
-    color: #FFFFFF;
-    background-color: #4E5A65;
-    padding: 15px;
-    border-radius: 15px;
+
+.box {
+    background-color: rgba(0, 0, 0, 0.65);
+    width: 380px;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+    border: 3px solid #00bcd4;
+    backdrop-filter: blur(4px);
+    position: absolute;
 }
 
-.c a :hover {
-    color: #FFFFFF;
-    background-color: #4E5A65;
-    padding: 15px;
-    border-radius: 15px;
+.box h2 {
+    font-size: 2rem;
+    color: #d5e5f2;
+    margin-bottom: 25px;
 }
 
-.c button:hover {
-    background-color: #4E5A65;
-    color: #FFFFFF;
-    border-radius: 5px;
-    border-color: #4E5A65;
-    font-weight: 900;
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    align-items: center;
+    text-align: center;
+}
+
+input:focus {
+    outline: none;
+    border: 3px solid #00bcd4;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 20px;
+    border: none;
+    font-size: 1.2rem;
+    background-color: #0288d1;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0288d1;
+    transform: skewX(-4deg) scale(1.08);
+}
+
+.tela {
+    margin-top: 20px;
+    color: #00e5ff;
+}
+
+.tela a {
+    color: #c8e6ff;
+    text-decoration: none;
+}
+
+.tela a:hover {
+    color: #00bcd4;
 }

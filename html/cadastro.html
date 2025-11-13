@@ -35,30 +35,34 @@
         </div>
     </header>
 
-    <div class="conteudo">
-        <div class="entradas">
-            <h2>Cadastro</h2>
-            <input type="text" id="iptNome" placeholder="Nome completo">
+    <div class="container">
+
+        <img src="../src/fundo.jpg" alt="">
+        <div class="box">
+
+            <h2>Criar Conta</h2>
+
+            <input type="text" placeholder="Nome" id="iptNome">
+            <div id="msg"></div>
+            <input type="email" placeholder="Email" id="iptEmail">
             <div id="msg2"></div>
-            <input type="text" id="iptEmail" placeholder="Email para cadastro">
-            <div id="msg3"></div>
-            <input type="password" id="iptSenha" onkeyup="mostrarSenha()" placeholder="Crie sua senha">
-            <div class="validacao">
+            <input type="password" placeholder="Crie sua senha" onkeyup="mostrarSenha()" id="iptSenha">
+            <div id="validacao">
                 <p id="p1"></p>
                 <p id="p2"></p>
                 <p id="p3"></p>
                 <p id="p4"></p>
                 <p id="p5"></p>
             </div>
-            <img src="../src/cadeado-trancado.png" alt="imagem do cadeado">
-            <input type="password" id="iptCheckSenha" placeholder="Confirme sua senha">
-            <div id="msg4"></div>
+            <input type="password" placeholder="Confirme sua senha" id="iptCheckSenha">
+            <div id="msg3"></div>
 
-            <div class="botao c">
-                <button onclick="cadastrar()" class="botao">Cadastrar</button>
+            <button onclick="cadastrar()">Cadastrar</button>
 
-            </div>
+            <p class="tela">Já possui conta? <a href="login.html">Entrar</a></p>
+
         </div>
+
     </div>
 
 
@@ -101,7 +105,7 @@
         var confirmarSenha = iptCheckSenha.value
         mostrarSenha()
 
-        
+
         msg2.innerHTML = ''
         msg3.innerHTML = ''
         msg4.innerHTML = ''
