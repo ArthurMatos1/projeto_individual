@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Cadastro | Radar do Surf</title>
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="./css/cadastro.css" />
+  <link rel="icon" href="./assets/imgs/logo.png" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+</head>
+
+<body>
+  <header class="navbar">
+    <img src="./assets/imgs/logo.png" alt="logo" class="logoheader">
+    <div class="menu">
+      <a href="index.html">
+        <p>Início</p>
+      </a>
+      <a href="">
+        <p>Quiz</p>
+      </a>
+      <a href="sobremim.html">
+        <p>Sobre mim</p>
+      </a>
+    </div>
+    <div class="cadastro">
+      <a href="login.html">
+        <p>Login</p>
+      </a>
+      <div class="cadastro">
+        <a href="./cadastro.html">
+          <p class="cadastrar">Cadastro</p>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <img src="./assets/imgs/fundo.jpg" alt="">
+    <div class="box">
+
+      <h2>Criar Conta</h2>
+
+      <input type="text" placeholder="Nome" id="iptNome">
+      <div id="msg2"></div>
+      <input type="email" placeholder="Insira seu Email" id="iptEmail">
+      <div id="msg3"></div>
+      <input type="password" placeholder="Crie sua senha" id="iptSenha">
+      <div id="msg4"></div>
+      <div id="validacao">
+        <p id="p1"></p>
+        <p id="p2"></p>
+        <p id="p3"></p>
+        <p id="p4"></p>
+        <p id="p5"></p>
+      </div>
+      <input type="password" placeholder="Confirme a senha" id="iptCheckSenha">
+      <div id="msg5"></div>
+      <button onclick="cadastrar()">Cadastrar</button>
+
+      <p class="tela">Já possui conta? <a href="login.html">Entrar</a></p>
+
+    </div>
+
+  </div>
+
+
+  <footer class="rodape">
+    <div class="rodape_bordao">
+      <img src="./assets/imgs/logo.png" alt="Logo Radar do Surf">
+    </div>
+    <div class="contato">
+      <h3>Contatos</h3>
+      <h4>Email</h4>
+      <p>arthur.matos@sptech.school</p>
+
+      <h4>Suporte</h4>
+      <p>arthur.matos@sptech.school</p>
+
+      <h4>Telefone</h4>
+      <p>(11) 9999-9999</p>
+    </div>
+
+    <div class="rodape_links">
+      <h3>Links</h3>
+      <a href="home.html">Início</a>
+      <a href="sobremim.html">Sobre mim</a>
+      <a href="quiz/quiz.html">Quiz</a>
+    </div>
+
+    <div class="rodape_contato">
+      <p> 📍São Paulo - Brasil</p>
+      <p> 📩contato@radardosurf.com</p>
+    </div>
+  </footer>
+</body>
+
+
+<script>
+
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+  //let listaEmpresasCadastradas = [];
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = iptNome.value;
+    var emailVar = iptEmail.value;
+    var senhaVar = iptSenha.value;
+    var confirmacaoSenhaVar = iptCheckSenha.value;
+  
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" 
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      //finalizarAguardar();
+      return false;
+    } /*else {
+      setInterval(sumirMensagem, 5000);
+    }*/
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    /*for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].id
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+        finalizarAguardar();
+      }
+    }*/
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        //idEmpresaVincularServer: idEmpresaVincular
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          //finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  /*function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }*/
+
+  /*function sumirMensagem() {
+    cardErro.style.display = "none";
+  }*/
+</script>

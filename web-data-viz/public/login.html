@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Radar do Surf</title>
+
+    <script src="./js/sessao.js"></script>
+
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="icon" href="./assets/imgs/logo.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <img src="./assets/imgs/logo.png" alt="logo" class="logoheader">
+        <div class="menu">
+            <a href="index.html">
+                <p>Início</p>
+            </a>
+            <a href="quiz.html">
+                <p>Quiz</p>
+            </a>
+            <a href="sobremim.html">
+                <p>Sobre mim</p>
+            </a>
+        </div>
+        <div class="cadastro">
+            <a href="login.html">
+                <p class="page">Login</p>
+            </a>
+            <a href="cadastro.html">
+                <p class="cadastrar">Cadastro</p>
+            </a>
+        </div>
+    </header>
+
+    <div class="conteudo">
+        <img src="./assets/imgs/otimo.jpg" alt="">
+
+        <div class="formulario">
+            <h2>Login</h2>
+
+            <p>Email</p>
+            <div class="campo">
+                <img src="./assets/imgs/e-mail.png" alt="Ícone de e-mail" class="icone">
+                <input type="text" id="iptEmail" placeholder="Insira seu E-mail">
+            </div>
+            <div id="msgEmail" class="validacao"></div>
+
+            <p>Senha</p>
+            <div class="campo">
+                <img src="./assets/imgs/cadeado.png" alt="Ícone de cadeado" class="icone">
+                <input type="password" id="iptSenha" placeholder="Insira sua senha">
+            </div>
+            <div id="msgSenha" class="validacao"></div>
+            <div id="divSenha" class="senha"></div>
+            <a href="cadastro.html" class="esqueci">Ainda não tem cadastro?</a>
+
+            <div class="botao c">
+                <button onclick="verificarTentativas()" class="botao">Entrar</button>
+            </div>
+            <div id="msg" class="mensagem"></div>
+        </div>
+    </div>
+    <footer class="rodape">
+        <div class="rodape_bordao">
+            <img src="./assets/imgs/logo.png" alt="Logo Radar do Surf">
+        </div>
+        <div class="contato">
+            <h3>Contatos</h3>
+            <h4>Email</h4>
+            <p>arthur.matos@sptech.school</p>
+
+            <h4>Suporte</h4>
+            <p>arthur.matos@sptech.school</p>
+
+            <h4>Telefone</h4>
+            <p>(11) 9999-9999</p>
+        </div>
+
+        <div class="rodape_links">
+            <h3>Links</h3>
+            <a href="home.html">Início</a>
+            <a href="sobremim.html">Sobre mim</a>
+            <a href="quiz/quiz.html">Quiz</a>
+        </div>
+
+        <div class="rodape_contato">
+            <p> 📍São Paulo - Brasil</p>
+            <p> 📩contato@radardosurf.com</p>
+        </div>
+    </footer>
+</body>
+
+<script>
+
+
+    function entrar() {
+        aguardar();
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>
