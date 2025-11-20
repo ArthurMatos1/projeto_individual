@@ -54,21 +54,14 @@
       <div id="msg3"></div>
       <input type="password" placeholder="Crie sua senha" id="iptSenha">
       <div id="msg4"></div>
-      <div id="validacao">
-        <p id="p1"></p>
-        <p id="p2"></p>
-        <p id="p3"></p>
-        <p id="p4"></p>
-        <p id="p5"></p>
-      </div>
       <input type="password" placeholder="Confirme a senha" id="iptCheckSenha">
-      <div id="msg5"></div>
+    
       <button onclick="cadastrar()">Cadastrar</button>
 
       <p class="tela">Já possui conta? <a href="login.html">Entrar</a></p>
-
+      <div id="msg" class="validacao"></div>
     </div>
-
+    
   </div>
 
 
@@ -90,9 +83,9 @@
 
     <div class="rodape_links">
       <h3>Links</h3>
-      <a href="home.html">Início</a>
+      <a href="index.html">Início</a>
       <a href="sobremim.html">Sobre mim</a>
-      <a href="quiz/quiz.html">Quiz</a>
+      <a href="quiz.html">Quiz</a>
     </div>
 
     <div class="rodape_contato">
@@ -118,6 +111,10 @@
     var senhaVar = iptSenha.value;
     var confirmacaoSenhaVar = iptCheckSenha.value;
   
+    msg.innerHTML = ``
+    msg2.innerHTML = ``
+    msg3.innerHTML = ``
+    msg4.innerHTML = ``
 
     // Verificando se há algum campo em branco
     if (
@@ -126,13 +123,29 @@
       senhaVar == "" ||
       confirmacaoSenhaVar == "" 
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+      msg.innerHTML =
+        "Erro! Verifique se os campos foram preenchidos corretamente";
 
       //finalizarAguardar();
-      return false;
-    } /*else {
+      //return false;
+    } 
+    if(nomeVar == ''){
+      msg2.innerHTML = `Verifique se o nome foi preenchido!`
+    }
+    if(emailVar == ''){
+      msg3.innerHTML = `Verifique se o email foi preenchido!`
+    }
+    if(senhaVar == ''){
+      msg4.innerHTML = `Verifique se a senha foi preenchida!`
+    }
+    if(confirmacaoSenhaVar != senhaVar){
+      msg4.innerHTML = `Verifique se as senhas são as mesmas!`
+    }
+
+    if(!(emailVar.toIncludes('@'))){
+      msg.innerHTML = `O campo E-mail deve conter @`
+    }
+    /*else {
       setInterval(sumirMensagem, 5000);
     }*/
 

@@ -28,13 +28,8 @@ header.navbar {
 }
 
 .logoheader {
-    width: 90px;
-}
-
-.logoheader img {
     width: 100px;
 }
-
 
 .menu,
 .cadastro {

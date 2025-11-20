@@ -86,9 +86,9 @@
 
         <div class="rodape_links">
             <h3>Links</h3>
-            <a href="home.html">Início</a>
+            <a href="index.html">Início</a>
             <a href="sobremim.html">Sobre mim</a>
-            <a href="quiz/quiz.html">Quiz</a>
+            <a href="quiz.html">Quiz</a>
         </div>
 
         <div class="rodape_contato">
@@ -102,20 +102,18 @@
 
 
     function entrar() {
-        aguardar();
 
-        var emailVar = email_input.value;
-        var senhaVar = senha_input.value;
+        var emailVar = iptEmail.value;
+        var senhaVar = iptSenha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+            //cardErro.style.display = "block"
+            msg.innerHTML = "Erro! Verifique se os campos acima foram preenchidos corretamente";
+            //finalizarAguardar();
             return false;
         }
-        else {
-            setInterval(sumirMensagem, 5000)
-        }
+
+
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
@@ -141,9 +139,10 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    
 
                     setTimeout(function () {
+                        alert('Login executado com sucesso!')
                         window.location = "./dashboard/cards.html";
                     }, 1000); // apenas para exibir o loading
 
@@ -155,19 +154,29 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    //finalizarAguardar(texto);
                 });
             }
 
         }).catch(function (erro) {
             console.log(erro);
         })
-
-        return false;
     }
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
+
+    var tentativas = 0
+    function verificarTentativas(){
+
+        while (tentativas < 3){
+            entrar()
+            tentativas++
+            if(tentativas < 3){
+                break;
+            }
+        }
+        if(tentativas >= 3){
+            msg.innerHTML = `Você atingiu o limite máximo de tentativas! <br> Recarregue a página para tentar novamente.`
+        }
     }
 
 </script>

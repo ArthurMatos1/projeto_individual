@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@300..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Original+Surfer&display=swap');
+
+body{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.fundo{
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quadradao{
+    width: 95%;
+    height: 95%;
+    background-color: blue;
+    display: flex;
+    flex-direction: row;
+}
+
+.menu{
+    border: 5px solid purple;
+    width: 17%;
+    height: 100%;
+}
+
+.conjunto{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border: 5px solid brown;
+}
+.texto{
+    border: 5px solid seagreen;
+    height: 15%;
+    width: 100%;
+}
+
+.kpi{
+    border: 5px solid red;
+    width: 100%;
+    height: 15%;
+}
+
+.graficos{
+    height: 100%;
+    width: 100%;
+    border: 5px solid green;
+    display: flex;
+    flex-direction: row;
+}
+
+.barra{
+    border: 5px solid fuchsia;
+    width: 50%;
+    height: 100%;
+}
+
+.outro{
+    border: 5px solid white;
+    width: 50%;
+    height: 100%;
+}

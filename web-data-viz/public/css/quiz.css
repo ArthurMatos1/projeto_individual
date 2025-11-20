@@ -1,0 +1,161 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@300..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Original+Surfer&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-style: initial;
+    font-family: "Fredoka", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #56d2f2;
+}
+
+
+.imagem {
+    position: fixed;
+    top: 10px;       
+    left: 10px;       
+    background-color: #013a63;
+    border-radius: 30%;  
+}
+
+.imagem img {
+    width: 120px;     
+    height: 100%;
+}
+
+#container {
+    margin-top: 130px;
+    background: #ffffffdd;
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(4px);
+    text-align: center;
+}
+
+
+
+#btIniciar {
+    padding: 14px 28px;
+    font-size: 1.3rem;
+    background: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+#btIniciar:hover {
+    background: #0096c7;
+    transform: scale(1.05);
+}
+
+
+#quiz h2 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    color: #023e8a;
+}
+
+#questao {
+    font-size: 1rem;
+    color: #03538b;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#pergunta {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #03045e;
+}
+
+#opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.opcao {
+    padding: 12px;
+    background: #caf0f8;
+    border: 2px solid #90e0ef;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s;
+    font-size: 1.1rem;
+}
+
+.opcao:hover {
+    background: #ade8f4;
+    transform: scale(1.02);
+}
+
+.opcao input {
+    margin-right: 8px;
+}
+
+
+#botoesNavegacao {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#btVoltar,
+#btAvancar {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#btVoltar {
+    background: #48cae4;
+    color: #013a63;
+}
+
+#btVoltar:hover {
+    background: #56d2f2;
+    transform: scale(1.05);
+}
+
+#btAvancar {
+    background: #0096c7;
+    color: white;
+}
+
+#btAvancar:hover {
+    background: #00b4d8;
+    transform: scale(1.05);
+}
+
+/* ------------------------ */
+/*      RESULTADO FINAL     */
+/* ------------------------ */
+
+#resultado {
+    margin-top: 20px;
+    padding: 20px;
+    background: #ffffffdd;
+    border-radius: 12px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #03045e;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+    animation: aparecer 0.5s ease forwards;
+}
+
+

@@ -30,11 +30,6 @@ header.navbar {
     width: 90px;
 }
 
-.logoheader img {
-    width: 100px;
-}
-
-
 .menu,
 .cadastro {
     display: flex;
@@ -189,3 +184,17 @@ button:hover {
 .tela a:hover {
     color: #00bcd4;
 }
+
+.validacao {
+    margin-top: 7px;
+    font-size: 1rem;
+    color: red;
+    font-weight: 700;
+}
+
+    #msg2, #msg3, #msg4, #msg5{
+    align-self: flex-start;
+    font-size: 0.9rem;
+    color: red;
+    font-weight: 700;
+} 

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz | Radar do surf</title>
+    <link rel="stylesheet" href="./css/quiz.css">
+    <link rel="icon" href="../public/assets/imgs/logo.png">
+</head>
+
+<body>
+    <div class="imagem">
+        <img src="../public/assets/imgs/logo.png" alt="">
+    </div>
+    <div id="container">
+        <button id="btIniciar" onclick="iniciarQuiz()">Iniciar Quiz</button>
+        <div id="quiz" style="display: none;">
+            <h2>Quiz Surf</h2>  
+            <div id="questao"></div>
+            <div id="pergunta"></div>
+            <div id="opcoes"></div>
+            <div id="botoesNavegacao">
+                <button id="btVoltar" onclick="voltar()">Voltar</button>
+                <button id="btAvancar" onclick="avancar()">Avançar</button>
+            </div>
+        </div>
+
+        <div id="resultado" style="display: none;"></div>
+    </div>
+
+
+    <script>
+
+        const perguntas = [
+            {
+                pergunta: "1. Quando você chega na praia, qual é a primeira coisa que faz?",
+                opcoes: [
+                    "Corro direto pro mar, não posso perder tempo!",
+                    "Fico observando as ondas antes de entrar.",
+                    "Dou uma volta, converso com a galera e depois penso em surfar.",
+                    "Prefiro curtir o visual e relaxar na areia."
+                ],
+                pontos: ["longboard", "shortboard", "fish", "funboard"]
+            },
+            {
+                pergunta: "2. Como você descreveria seu estilo de surf?",
+                opcoes: [
+                    "Radical e cheio de manobras.",
+                    "Suave e fluido.",
+                    "Equilibrado, gosto de um pouco de tudo.",
+                    "Tranquilo, só pelo prazer."
+                ],
+                pontos: ["shortboard", "longboard", "fish", "funboard"]
+            },
+            {
+                pergunta: "3. Qual o tamanho de onda ideal pra você?",
+                opcoes: [
+                    "Grandes e desafiadoras.",
+                    "Médias com boa formação.",
+                    "Pequenas, só pra brincar.",
+                    "Tanto faz! Quero me divertir."
+                ],
+                pontos: ["gun", "shortboard", "fish", "funboard"]
+            },
+            {
+                pergunta: "4. O que mais te atrai no surf?",
+                opcoes: [
+                    "A adrenalina e os desafios.",
+                    "A conexão com a natureza.",
+                    "O equilíbrio e a técnica.",
+                    " A paz e a sensação de liberdade."
+                ],
+                pontos: ["shortboard", "fish","longboard", "funboard"]
+            },
+            {
+
+                pergunta: "5. Se você tivesse que escolher um destino de surf, qual seria?",
+                opcoes: [
+                    "Nazaré (Portugal) – ondas gigantes e poderosas.",
+                    "Bali (Indonésia) – perfeição e boas vibrações.",
+                    "Saquarema (Brasil) – boas ondas e clima local.",
+                    "Fernando de Noronha – natureza e tranquilidade."
+                ],
+                pontos: ["gun", "shortboard", "fish", "longboard" ]
+            },
+            {
+
+                pergunta: "6. O que mais te atraia no surf?",
+                opcoes: [
+                    ""
+                ]
+            }
+        ];
+
+        const pranchas = {
+            longboard: {
+                nome: "Longboard ",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/LongboardSurf.jpg/640px-LongboardSurf.jpg",
+                mensagem: "Você gosta de fluidez, estilo e ondas longas!"
+            },
+            shortboard: {
+                nome: "Shortboard ",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Shortboard_Typical.png/640px-Shortboard_Typical.png",
+                mensagem: "Rápido, radical e sempre buscando evolução!"
+            },
+            fish: {
+                nome: "Fish ",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Fish_surfboard.jpg/640px-Fish_surfboard.jpg",
+                mensagem: "Você gosta de diversão, velocidade e curvas suaves!"
+            },
+            funboard: {
+                nome: "Funboard ",
+                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Funboard_surfboard.png/600px-Funboard_surfboard.png",
+                mensagem: "Equilíbrio perfeito entre estabilidade e diversão!"
+            },
+            gun: {
+                nome: "Gun ",
+                img: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Gun_surfboard.jpg",
+                mensagem: "Você nasceu para adrenalina e ondas grandes!"
+            }
+        };
+
+        const pontuacao = { longboard: 0, shortboard: 0, fish: 0, funboard: 0, gun: 0 };
+
+        let perguntaAtual = 0;
+        let respostasUsuario = {};
+
+        const quizPai = document.getElementById("quiz");
+        const infoQuestao = document.getElementById("questao");
+        const textoPergunta = document.getElementById("pergunta");
+        const containerOpcoes = document.getElementById("opcoes");
+        const botaoVoltar = document.getElementById("btVoltar");
+        const botaoAvancar = document.getElementById("btAvancar");
+        const containerResultado = document.getElementById("resultado");
+        const botaoIniciar = document.getElementById("btIniciar");
+
+        function iniciarQuiz() {
+            botaoIniciar.style.display = "none";
+            quizPai.style.display = "block";
+            carregarPergunta();
+        }
+
+        function carregarPergunta() {
+            const q = perguntas[perguntaAtual];
+
+            infoQuestao.textContent = `Pergunta ${perguntaAtual + 1} de ${perguntas.length}`;
+            textoPergunta.textContent = q.pergunta;
+
+            containerOpcoes.innerHTML = "";
+
+            q.opcoes.forEach((opcao, index) => {
+                const div = document.createElement("div");
+                div.className = "opcao";
+
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = "opcao";
+                input.value = index;
+                input.checked = respostasUsuario[perguntaAtual] == index;
+
+                const label = document.createElement("label");
+                label.textContent = opcao;
+
+                div.appendChild(input);
+                div.appendChild(label);
+                containerOpcoes.appendChild(div);
+            });
+
+            botaoVoltar.style.display = perguntaAtual === 0 ? "none" : "inline-block";
+            botaoAvancar.textContent = (perguntaAtual === perguntas.length - 1) ? "Finalizar" : "Avançar";
+        }
+
+
+        function avancar() {
+            const selecionada = document.querySelector("input[name='opcao']:checked");
+
+            if (!selecionada) {
+                alert("Selecione uma opção!");
+                return;
+            }
+
+            respostasUsuario[perguntaAtual] = Number(selecionada.value);
+
+            if (perguntaAtual < perguntas.length - 1) {
+                perguntaAtual++;
+                carregarPergunta();
+            } else {
+                calcularResultado();
+            }
+        }
+
+        function voltar() {
+            if (perguntaAtual > 0) {
+                perguntaAtual--;
+                carregarPergunta();
+            }
+        }
+
+        function calcularResultado() {
+            for (let p in pontuacao) pontuacao[p] = 0;
+
+            perguntas.forEach((p, index) => {
+                const opcaoEscolhida = respostasUsuario[index];
+                const tipoPrancha = p.pontos[opcaoEscolhida];
+                pontuacao[tipoPrancha]++;
+            });
+
+            let resultadoFinal = Object.keys(pontuacao).reduce((a, b) =>
+                pontuacao[a] > pontuacao[b] ? a : b
+            );
+
+            mostrarResultado(resultadoFinal);
+        }
+
+        function mostrarResultado(prancha) {
+            quizPai.style.display = "none";
+            containerResultado.style.display = "block";
+
+            containerResultado.innerHTML = `
+                <h2>${pranchas[prancha].nome}</h2>
+                <img src="${pranchas[prancha].img}" width="300">
+                <p>${pranchas[prancha].mensagem}</p>
+                <button onclick="location.reload()" style="padding: 10px 20px; background:#0044aa; border: none; color:white; border-radius:8px;">Recomeçar</button>
+            `;
+        }
+
+    </script>
+
+</body>
+
+</html>
