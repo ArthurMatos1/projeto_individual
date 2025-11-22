@@ -11,12 +11,14 @@
 
 <body>
     <div class="imagem">
+        <a href="../public/index.html">
         <img src="../public/assets/imgs/logo.png" alt="">
+        </a>
     </div>
     <div id="container">
         <button id="btIniciar" onclick="iniciarQuiz()">Iniciar Quiz</button>
         <div id="quiz" style="display: none;">
-            <h2>Quiz Surf</h2>  
+            <h2>Quiz Surf</h2>
             <div id="questao"></div>
             <div id="pergunta"></div>
             <div id="opcoes"></div>
@@ -39,9 +41,11 @@
                     "Corro direto pro mar, não posso perder tempo!",
                     "Fico observando as ondas antes de entrar.",
                     "Dou uma volta, converso com a galera e depois penso em surfar.",
-                    "Prefiro curtir o visual e relaxar na areia."
+                    "Prefiro curtir o visual e relaxar na areia.",
+                    "Ajusto minha prancha e preparo tudo com calma antes de entrar."
+
                 ],
-                pontos: ["longboard", "shortboard", "fish", "funboard"]
+                pontos: ["gun", "fish", "longboard", "funboard", "shortboard"]
             },
             {
                 pergunta: "2. Como você descreveria seu estilo de surf?",
@@ -49,9 +53,10 @@
                     "Radical e cheio de manobras.",
                     "Suave e fluido.",
                     "Equilibrado, gosto de um pouco de tudo.",
-                    "Tranquilo, só pelo prazer."
+                    "Tranquilo, só pelo prazer.",
+                    "Técnico e focado em evoluir detalhes"
                 ],
-                pontos: ["shortboard", "longboard", "fish", "funboard"]
+                pontos: ["gun", "longboard", "fish", "funboard", "shortboard"]
             },
             {
                 pergunta: "3. Qual o tamanho de onda ideal pra você?",
@@ -59,9 +64,10 @@
                     "Grandes e desafiadoras.",
                     "Médias com boa formação.",
                     "Pequenas, só pra brincar.",
-                    "Tanto faz! Quero me divertir."
+                    "Tanto faz! Quero me divertir.",
+                    "Ondas longas para aproveitar bem a linha"
                 ],
-                pontos: ["gun", "shortboard", "fish", "funboard"]
+                pontos: ["gun", "fish", "longboard", "funboard", "shortboard"]
             },
             {
                 pergunta: "4. O que mais te atrai no surf?",
@@ -69,9 +75,10 @@
                     "A adrenalina e os desafios.",
                     "A conexão com a natureza.",
                     "O equilíbrio e a técnica.",
-                    " A paz e a sensação de liberdade."
+                    " A paz e a sensação de liberdade.",
+                    "A evolução constante e o aprendizado"
                 ],
-                pontos: ["shortboard", "fish","longboard", "funboard"]
+                pontos: ["gun", "longboard", "fish", "funboard", "shortboard"]
             },
             {
 
@@ -80,43 +87,84 @@
                     "Nazaré (Portugal) – ondas gigantes e poderosas.",
                     "Bali (Indonésia) – perfeição e boas vibrações.",
                     "Saquarema (Brasil) – boas ondas e clima local.",
-                    "Fernando de Noronha – natureza e tranquilidade."
+                    "Fernando de Noronha – natureza e tranquilidade.",
+                    "Costa Rica - constância de onda e clima relax"
                 ],
-                pontos: ["gun", "shortboard", "fish", "longboard" ]
+                pontos: ["gun", "shortboard", "fish", "longboard", "funboard"]
             },
             {
 
-                pergunta: "6. O que mais te atraia no surf?",
+                pergunta: "6. Como você descreveria sua personalidade no surf?",
                 opcoes: [
-                    ""
-                ]
+                    "Intenso(a) e competitivo(a).",
+                    "Calmo(a) e observador(a).",
+                    "Flexível e adaptável.",
+                    "Tranquilo(a) e sonhador(a).",
+                    "Determinado e focado em melhorar"
+                ],
+                pontos: ["gun", "longboard", "fish", "funboard", "shortboard"]
+            },
+            {
+                pergunta: "7. Se o mar estivesse totalmente diferente do previsto, o que você faria?",
+                opcoes: [
+                    "Espero melhorar, paciência é tudo.",
+                    "Entro mesmo assim, quero o desafio!",
+                    "Tento aproveitar de outro jeito.",
+                    "Fico na areia, curtindo o som das ondas.",
+                    "Procuro outro pico com condições melhores"
+                ],
+                pontos: ["longboard", "gun", "fish", "funboard", "shortboard"]
+            },
+            {
+
+                pergunta: "8. Qual frase combina mais com você?",
+                opcoes: [
+                    "Quero aproveitar cada onda com calma.",
+                    "Quero algo versátil para qualquer condição.",
+                    "Quero performance e adrenalina.",
+                    "Quero encarar ondas grandes e sentir a potência do mar.",
+                    "Quero melhorar minha linha e meu estilo em cada sessão"
+                ],
+                pontos: ["longboard", "fish", "funboard", "gun", "shortboard"]
+            },
+            {
+
+                pergunta: "9. Quando você entra na água, seu foco principal é...",
+                opcoes: [
+                    "Relaxar",
+                    "Me divertir",
+                    "Evoluir tecnicamente",
+                    "Sentir adrenalina",
+                    "Me conectar com o mar e limpar a mente"
+                ],
+                pontos: ["longboard", "funboard", "shortboard", "gun", "fish"]
             }
         ];
 
         const pranchas = {
             longboard: {
                 nome: "Longboard ",
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/LongboardSurf.jpg/640px-LongboardSurf.jpg",
+                img: "../public/assets/imgs/longboard.jpg",
                 mensagem: "Você gosta de fluidez, estilo e ondas longas!"
             },
             shortboard: {
                 nome: "Shortboard ",
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Shortboard_Typical.png/640px-Shortboard_Typical.png",
+                img: "../public/assets/imgs/short.webp",
                 mensagem: "Rápido, radical e sempre buscando evolução!"
             },
             fish: {
                 nome: "Fish ",
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Fish_surfboard.jpg/640px-Fish_surfboard.jpg",
+                img: "../public/assets/imgs/fish.jpg",
                 mensagem: "Você gosta de diversão, velocidade e curvas suaves!"
             },
             funboard: {
                 nome: "Funboard ",
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Funboard_surfboard.png/600px-Funboard_surfboard.png",
+                img: "../public/assets/imgs/fun.webp",
                 mensagem: "Equilíbrio perfeito entre estabilidade e diversão!"
             },
             gun: {
                 nome: "Gun ",
-                img: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Gun_surfboard.jpg",
+                img: "../public/assets/imgs/gun2.jpg",
                 mensagem: "Você nasceu para adrenalina e ondas grandes!"
             }
         };
@@ -178,6 +226,7 @@
             if (!selecionada) {
                 alert("Selecione uma opção!");
                 return;
+
             }
 
             respostasUsuario[perguntaAtual] = Number(selecionada.value);
@@ -206,11 +255,46 @@
                 pontuacao[tipoPrancha]++;
             });
 
+            fetch("/usuarios/pergunta", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    longboardServer: pontuacao.longboard,
+                    funboardServer: pontuacao.funboard,
+                    shortboardServer: pontuacao.shortboard,
+                    fishboardServer: pontuacao.fish,
+                    gunServer: pontuacao.gun,
+                    idServer: sessionStorage.ID_USUARIO
+                    //idEmpresaVincularServer: idEmpresaVincular
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+
             let resultadoFinal = Object.keys(pontuacao).reduce((a, b) =>
                 pontuacao[a] > pontuacao[b] ? a : b
             );
 
             mostrarResultado(resultadoFinal);
+            
+            /*if(perguntas.length == 9 ){
+                    window.location = '../dashboard.html'
+                }
+*/
         }
 
         function mostrarResultado(prancha) {
@@ -224,6 +308,8 @@
                 <button onclick="location.reload()" style="padding: 10px 20px; background:#0044aa; border: none; color:white; border-radius:8px;">Recomeçar</button>
             `;
         }
+
+
 
     </script>
 

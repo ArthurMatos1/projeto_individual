@@ -125,9 +125,6 @@
     ) {
       msg.innerHTML =
         "Erro! Verifique se os campos foram preenchidos corretamente";
-
-      //finalizarAguardar();
-      //return false;
     } 
     if(nomeVar == ''){
       msg2.innerHTML = `Verifique se o nome foi preenchido!`
@@ -142,9 +139,12 @@
       msg4.innerHTML = `Verifique se as senhas são as mesmas!`
     }
 
-    if(!(emailVar.toIncludes('@'))){
-      msg.innerHTML = `O campo E-mail deve conter @`
+    else if(!(emailVar.includes('@'))){
+      msg3.innerHTML = `O campo E-mail deve conter @`
+    } else if(!(emailVar.includes('.'))){
+      msg3.innerHTML = `O campo E-mail deve conter .`
     }
+
     /*else {
       setInterval(sumirMensagem, 5000);
     }*/
@@ -181,24 +181,18 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
-
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
           setTimeout(() => {
             window.location = "login.html";
+            alert("Cadastro efetuado com sucesso! Agora faça o login")
           }, "2000");
 
-          limparFormulario();
-          //finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+        //finalizarAguardar();
       });
 
     return false;

@@ -20,7 +20,7 @@ function autenticar(req, res) {
                         if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
                                     res.json({
-                                        id: resultadoAutenticar[0].id,
+                                        id: resultadoAutenticar[0].idUsuario,
                                         email: resultadoAutenticar[0].email,
                                         nome: resultadoAutenticar[0].nome,
                                         senha: resultadoAutenticar[0].senha,
@@ -77,7 +77,51 @@ function cadastrar(req, res) {
     }
 }
 
+
+function pergunta(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var longboard = req.body.longboardServer;
+    var funboard = req.body.funboardServer;
+    var shortboard = req.body.shortboardServer;
+    var fishboard = req.body.fishboardServer;
+    var gunboard = req.body.gunServer;
+    var id_usuario = req.body.idServer;
+
+    // Faça as validações dos valores
+    if (longboard == undefined) {
+        res.status(400).send("Seu campo long está undefined!");
+    } else if (funboard == undefined) {
+        res.status(400).send("Seu campo fun está undefined!");
+    } else if (shortboard == undefined) {
+        res.status(400).send("Seu campo short está undefined!");
+    } else if (fishboard == undefined){
+        res.status(400).send("Seu campo fish está undefined!")
+    } else if (gunboard == undefined){
+        res.status(400).send("Seu campo gun está undefined!")
+    }
+    else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.pergunta(longboard, funboard, shortboard, fishboard, gunboard, id_usuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    pergunta
 }
