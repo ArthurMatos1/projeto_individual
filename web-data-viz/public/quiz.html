@@ -12,7 +12,7 @@
 <body>
     <div class="imagem">
         <a href="../public/index.html">
-        <img src="../public/assets/imgs/logo.png" alt="">
+            <img src="./assets/imgs/logo.png" alt="">
         </a>
     </div>
     <div id="container">
@@ -144,27 +144,27 @@
         const pranchas = {
             longboard: {
                 nome: "Longboard ",
-                img: "../public/assets/imgs/longboard.jpg",
+                img: "./assets/imgs/longboard.jpg",
                 mensagem: "Você gosta de fluidez, estilo e ondas longas!"
             },
             shortboard: {
                 nome: "Shortboard ",
-                img: "../public/assets/imgs/short.webp",
+                img: "./assets/imgs/short.webp",
                 mensagem: "Rápido, radical e sempre buscando evolução!"
             },
             fish: {
                 nome: "Fish ",
-                img: "../public/assets/imgs/fish.jpg",
+                img: "./assets/imgs/fish.jpg",
                 mensagem: "Você gosta de diversão, velocidade e curvas suaves!"
             },
             funboard: {
                 nome: "Funboard ",
-                img: "../public/assets/imgs/fun.webp",
+                img: "./assets/imgs/fun.webp",
                 mensagem: "Equilíbrio perfeito entre estabilidade e diversão!"
             },
             gun: {
                 nome: "Gun ",
-                img: "../public/assets/imgs/gun2.jpg",
+                img: "./assets/imgs/gun2.webp",
                 mensagem: "Você nasceu para adrenalina e ondas grandes!"
             }
         };
@@ -290,11 +290,6 @@
             );
 
             mostrarResultado(resultadoFinal);
-            
-            /*if(perguntas.length == 9 ){
-                    window.location = '../dashboard.html'
-                }
-*/
         }
 
         function mostrarResultado(prancha) {
@@ -306,7 +301,7 @@
                 <img src="${pranchas[prancha].img}" width="300">
                 <p>${pranchas[prancha].mensagem}</p>
                 <button onclick="location.reload()" style="padding: 10px 20px; background:#0044aa; border: none; color:white; border-radius:8px;">Recomeçar</button>
-            `;
+                <a href="./dashboard/dashboard.html" style="padding: 10px 10px; background:#0044aa; border: none; color: white; border-radius:8px;"> Ver dashboard</a>`;
         }
 
 

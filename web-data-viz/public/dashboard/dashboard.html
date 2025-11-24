@@ -16,11 +16,11 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body onload="graficoBarra()">
+<body onload="graficoBarra(); graficoPolar(); kpi(); kpi2()">
     <div class="fundo">
         <div class="quadradao">
             <div class="menu">
-                <img src="/public/assets/imgs/logo.png" alt="">
+                <img src="../assets/imgs/logo.png" alt="">
                 <a href="dashboard.html">
                     <p>Inicio</p>
                 </a>
@@ -37,30 +37,29 @@
                     <p>Olá <b id="puxar"></b>, Seja Bem-vindo!</p>
                 </div>
 
-    <div class="kpi">
-    <div class="kpicard">
+                <div class="kpi">
+                    <div class="kpicard">
 
-        <div class="cardkp kpi1">
-            <h3> Prancha com maior<br>resultado</h3>
-            <p>
-                arquivo teste
-            </p>
-        </div>
+                        <div class="cardkp kpi1">
+                            <h3> Sua prancha com maior<br>resultado</h3>
+                            <p id="paragrafo">
+                            </p>
+                        </div>
 
-        <div class="cardkp kpi3">
-            <h3>
-                Prancha com menor<br>resultado
-            </h3>
-            <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                Incidunt voluptas voluptatum nobis vel molestias laudantium odit fuga odio, 
-                reprehenderit labore beatae tempore ipsum sint magnam quasi! 
-                Mollitia voluptates qui saepe?
-            </p>
-        </div>
+                        <div class="cardkp kpi3">
+                            <h3>
+                                Prancha com maior<br>resultado<br> dos usuários
+                            </h3>
+                            <p id="paragrafo2">
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                Incidunt voluptas voluptatum nobis vel molestias laudantium odit fuga odio,
+                                reprehenderit labore beatae tempore ipsum sint magnam quasi!
+                                Mollitia voluptates qui saepe?
+                            </p>
+                        </div>
 
-    </div>
-</div>
+                    </div>
+                </div>
                 <div class="graficos">
                     <div class="barra">
                         <canvas id="mychart1"></canvas>
@@ -81,11 +80,10 @@
 
 <script>
 
-    function graficoBarra(){
-        
-        var nomeLogin = document.getElementById('puxar')
-        
-        nomeLogin = sessionStorage.NOME_USUARIO
+    function graficoBarra() {
+
+
+        puxar.innerHTML = sessionStorage.NOME_USUARIO
 
         fetch("/medidas/mostrarGrafico", {
             method: "POST",
@@ -94,117 +92,210 @@
             }
         }).then(function (response) {
             if (response.ok) {
-                response.json().then(function (resposta){
+                response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                
-                let longboard = 0
-                let shortboard = 0
-                let gunboard = 0
-                let fishboard = 0
-                let funboard = 0
 
-                resposta.forEach(item => {
-                    longboard = item.longboard
-                    shortboard = item.shortboard
-                    gunboard = item.gunboard
-                    fishboard = item.fishboard
-                    funboard = item.funboard
-                });
+                    let longboard = 0
+                    let shortboard = 0
+                    let gunboard = 0
+                    let fishboard = 0
+                    let funboard = 0
 
-                
+                    resposta.forEach(item => {
+                        longboard = item.Longboard
+                        shortboard = item.shortboard
+                        gunboard = item.Gunboard
+                        fishboard = item.Fishboard
+                        funboard = item.Funboard
+                    });
 
 
-        const ctxbar = document.getElementById('mychart1');
-    new Chart(ctxbar, {
-        type: 'bar',
-        data: {
-            labels: ['Tipo de pranchas'],
-            datasets: [{
-                label: 'Longboard',
-                data: [longboard],
-                backgroundColor: '#80EF80',
-                pointRadius: 4.5,
-                borderWidth: 0,
 
-            },
-            {
-                label: 'Shortboard',
-                data: [shortboard],
-                backgroundColor: '#01579b',
-                pointRadius: 4.5,
-                borderWidth: 0,
+                    const ctxbar = document.getElementById('mychart1');
+                    new Chart(ctxbar, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Tipo de pranchas'],
+                            datasets: [{
+                                label: 'Longboard',
+                                data: [longboard],
+                                backgroundColor: '#80EF80',
+                                pointRadius: 4.5,
+                                borderWidth: 0,
+
+                            },
+                            {
+                                label: 'Shortboard',
+                                data: [shortboard],
+                                backgroundColor: '#01579b',
+                                pointRadius: 4.5,
+                                borderWidth: 0,
 
 
-            },
-            {
-                label: 'Funboard',
-                data: [funboard],
-                backgroundColor: 'brown',
-                pointRadius: 4.5,
-                borderWidth: 0,
+                            },
+                            {
+                                label: 'Funboard',
+                                data: [funboard],
+                                backgroundColor: 'brown',
+                                pointRadius: 4.5,
+                                borderWidth: 0,
 
-            },
-            {
-                label: 'Gunboard',
-                data: [gunboard],
-                backgroundColor: '#013a4a',
-                pointRadius: 4.5,
-                borderWidth: 0,
+                            },
+                            {
+                                label: 'Gunboard',
+                                data: [gunboard],
+                                backgroundColor: '#013a4a',
+                                pointRadius: 4.5,
+                                borderWidth: 0,
 
-            },
-            {
-                label: 'Fishboard',
-                data: [fishboard],
-                backgroundColor: 'pink',
-                pointRadius: 4.5,
-                borderWidth: 0,
+                            },
+                            {
+                                label: 'Fishboard',
+                                data: [fishboard],
+                                backgroundColor: 'pink',
+                                pointRadius: 4.5,
+                                borderWidth: 0,
 
-            }],
+                            }],
 
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            indexAxis: 'x',
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: { display: true, text: 'Quantidade de resultados' },
-                }
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            indexAxis: 'x',
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: { display: true, text: 'Quantidade de resultados' },
+                                }
+                            }
+                        }
+                    });
+                })
+            } else {
+                console.error(`O dado não foi encontrado!`)
             }
-        }
-    });
-    })
-        }else{
-            console.error(`O dado não foi encontrado!`)
-        }
-    })
-        .catch(function (error){
-            console.error(`Erro para obter dados: ${error.message}`);
         })
+            .catch(function (error) {
+                console.error(`Erro para obter dados: ${error.message}`);
+            })
     }
 
-    const ctxPolar = document.getElementById('mychart2')
-    new Chart(ctxPolar, {
-        type: 'doughnut',
-        data : {
-            labels: [
-                'Longboard',
-                'Shortboard',
-                'Gunboard',
-                'Funboard',
-                'Fishboard'
-            ],
-            datasets: [{
-                label: 'My First Dataset',
-                data: [2, 2, 2],
-                backgroundColor: [
-                    'red',
-                    'green',
-                    'brown'
-                ],
-                hoverOffset: 4
-            }]
-        }
-    });
+    function graficoPolar() {
+        fetch("/medidas/graficoPolar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    let longboard = 0
+                    let shortboard = 0
+                    let gunboard = 0
+                    let fishboard = 0
+                    let funboard = 0
+
+                    resposta.forEach(item => {
+                        longboard = item.Longboard
+                        shortboard = item.shortboard
+                        gunboard = item.Gunboard
+                        fishboard = item.Fishboard
+                        funboard = item.Funboard
+                    });
+
+                    const ctxPolar = document.getElementById('mychart2')
+                    new Chart(ctxPolar, {
+                        type: 'doughnut',
+                        data: {
+                            labels: [
+                                'Longboard',
+                                'Shortboard',
+                                'Gunboard',
+                                'Funboard',
+                                'Fishboard'
+                            ],
+                            datasets: [{
+                                label: 'My First Dataset',
+                                data: [longboard, shortboard, gunboard, fishboard, funboard],
+                                backgroundColor: [
+                                    'red',
+                                    'green',
+                                    'brown',
+                                    'pink',
+                                    'grey'
+                                ],
+                                hoverOffset: 4
+                            }]
+                        }
+                    });
+                })
+            } else {
+                console.error(`O dado não foi encontrado!`)
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro para obter dados: ${error.message}`);
+            })
+    }
+
+    function kpi() {
+        fetch("/medidas/kpi", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    let vencedor = 0
+
+                    resposta.forEach(item => {
+                        vencedor = item.pranchaVencedora  
+                    });
+
+                    paragrafo.innerHTML = vencedor
+
+                }) } else {
+                    console.error(`O dado não foi encontrado!`)
+                }
+        })
+            .catch(function (error) {
+                console.error(`Erro para obter dados: ${error.message}`);
+            })
+    }
+
+        function kpi2(){  
+        
+            fetch("/medidas/kpi2", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    let vencedor = 0
+
+                    resposta.forEach(item => {
+                        vencedor = item.pranchaVencedora  
+                    });
+
+                    paragrafo2.innerHTML = vencedor
+
+                }) } else {
+                    console.error(`O dado não foi encontrado!`)
+                }
+        })
+            .catch(function (error) {
+                console.error(`Erro para obter dados: ${error.message}`);
+            })
+    }
+
 </script>
