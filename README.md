@@ -1,4 +1,4 @@
-#🏄‍♂️ Radar do Surf: Descubra Seu Estilo de Surf#
+🏄‍♂️ Radar do Surf: Descubra Seu Estilo de Surf
 
 Bem-vindo ao Radar do Surf, um website temático e interativo no universo do surf. O meu objetivo é transformar sua experiência e personalidade em uma conexão direta com o mar, ajudando você a descobrir qual estilo de surf ou tipo de prancha mais te representa através de um quiz divertido e informativo.
 
