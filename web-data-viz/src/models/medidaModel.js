@@ -97,56 +97,67 @@ function kpi() {
     return database.executar(instrucaoSql);
 }
 
-function kpi2() {
+function kpi2() { // descobrir qual select fazer aqui
 
     var instrucaoSql = `
+      
+       SELECT 
+    CASE
+        WHEN longboard_v >= funboard_v
+         AND longboard_v >= shortboard_v
+         AND longboard_v >= fishboard_v
+         AND longboard_v >= gunboard_v THEN 'Longboard'
+
+        WHEN funboard_v >= longboard_v
+         AND funboard_v >= shortboard_v
+         AND funboard_v >= fishboard_v
+         AND funboard_v >= gunboard_v THEN 'Funboard'
+
+        WHEN shortboard_v >= longboard_v
+         AND shortboard_v >= funboard_v
+         AND shortboard_v >= fishboard_v
+         AND shortboard_v >= gunboard_v THEN 'Shortboard'
+
+        WHEN fishboard_v >= longboard_v
+         AND fishboard_v >= funboard_v
+         AND fishboard_v >= shortboard_v
+         AND fishboard_v >= gunboard_v THEN 'Fishboard'
+
+        ELSE 'Gunboard'
+    END AS prancha
+FROM (
     SELECT
-	ROUND(
-		(SELECT COUNT(*)
-        FROM caracteristica
-            WHERE longboard  >= funboard
-            AND longboard  >= shortboard
-            AND longboard  >= fishboard
-            AND longboard  >= gunboard)
-			/ (SELECT COUNT(*) FROM caracteristica) * 100, 0) AS Longboard,
+        (SELECT COUNT(*) FROM caracteristica
+         WHERE longboard >= funboard
+           AND longboard >= shortboard
+           AND longboard >= fishboard
+           AND longboard >= gunboard) AS longboard_v,
 
-	ROUND(
-		(SELECT COUNT(*)
-			FROM caracteristica
-            WHERE funboard   >= longboard
-            AND funboard   >= shortboard
-            AND funboard   >= fishboard
-            AND funboard   >= gunboard)
-             /	(SELECT COUNT(*) FROM caracteristica) * 100, 0) AS Funboard,
-	
-		ROUND(
-			(SELECT COUNT(*)
-            FROM caracteristica
-            WHERE shortboard >= longboard
-            AND shortboard >= funboard
-            AND shortboard >= fishboard
-            AND shortboard >= gunboard)
-             / (SELECT COUNT(*) FROM caracteristica) * 100, 0) AS Shortborad,
-            
-            ROUND(
-				(SELECT COUNT(*)
-                FROM caracteristica
-            WHERE fishboard  >= longboard
-            AND fishboard  >= funboard
-            AND fishboard  >= shortboard
-            AND fishboard  >= gunboard)
-             / (SELECT COUNT(*) FROM caracteristica) * 100, 0) AS Fishboard,
+        (SELECT COUNT(*) FROM caracteristica
+         WHERE funboard >= longboard
+           AND funboard >= shortboard
+           AND funboard >= fishboard
+           AND funboard >= gunboard) AS funboard_v,
 
-	ROUND(
-		(SELECT COUNT(*)
-        FROM caracteristica
+        (SELECT COUNT(*) FROM caracteristica
+         WHERE shortboard >= longboard
+           AND shortboard >= funboard
+           AND shortboard >= fishboard
+           AND shortboard >= gunboard) AS shortboard_v,
+
+        (SELECT COUNT(*) FROM caracteristica
+         WHERE fishboard >= longboard
+           AND fishboard >= funboard
+           AND fishboard >= shortboard
+           AND fishboard >= gunboard) AS fishboard_v,
+
+        (SELECT COUNT(*) FROM caracteristica
             WHERE gunboard >= longboard
-            AND gunboard >= funboard
-            AND gunboard >= shortboard
-            AND gunboard >= fishboard)
-             / (SELECT COUNT(*) FROM caracteristica) * 100, 0) AS Gunboard
-                FROM caracteristica;
-    
+           AND gunboard >= funboard
+           AND gunboard >= shortboard
+           AND gunboard >= fishboard) AS gunboard_v
+) AS v;
+                
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

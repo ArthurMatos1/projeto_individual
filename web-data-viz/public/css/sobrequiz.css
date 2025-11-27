@@ -1,0 +1,233 @@
+@charset "UTF-8";
+
+    @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@300..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Original+Surfer&display=swap');
+
+/* Padronizado para o site todo!!!! */
+
+*,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-style: initial;
+    font-family: "Fredoka", sans-serif;
+}
+
+
+header.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 60px;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    font-size: 20px;
+}
+
+.logoheader {
+    width: 100px;
+}
+
+.menu,
+.cadastro {
+    display: flex;
+    gap: 25px;
+}
+
+.menu a,
+.cadastro a {
+    text-decoration: none;
+    color: #d5e5f2;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.menu a:hover,
+.cadastro a:hover {
+    color: #8BBBD9;
+}
+
+.rodape {
+    background: linear-gradient(135deg, #01579b, #0288d1);
+    color: white;
+    padding: 60px 10%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    border-top: 5px solid #00e5ff;
+    position: relative;
+}
+
+.rodape_bordao img {
+    width: 200px;
+    filter: drop-shadow(0 0 10px #00e5ff);
+    transition: 0.3s;
+}
+
+.rodape_bordao img:hover {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.rodape_links a,
+.contato p {
+    color: #e0f7fa;
+    text-decoration: none;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+}
+
+.rodape_links a:hover,
+.contato p:hover {
+    color: #00e5ff;
+    transform: translateX(5px);
+}
+
+.rodape_links h3,
+.contato h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.rodape_contato p {
+    font-size: 1rem;
+    color: #b3e5fc;
+}
+
+
+.page {
+    text-decoration: underline;
+    text-decoration-color: #03a9f4;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 8px;
+}
+
+
+.container {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #8BBBD9;
+    width: 95%;
+    border-radius: 10px;
+    justify-self: center;
+    padding: 20px;
+}
+
+.container img {
+    border: 7px solid #0288d1;
+    border-radius: 10px;
+    width: 45%;
+    height: 40%;
+}
+
+.container p {
+    margin-top: 20px;
+    color: #0288d1;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 10px 0px;
+    
+}
+
+.explicacao_prancha{
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    align-items: center;
+    margin: 150px 0;
+}
+
+.img_prancha{
+    width: 600px;
+    border-radius: 12px;
+    border: 5px solid #0288d1;
+}
+
+.cd {
+    width: 600px;
+}
+
+.cq {
+    width: 550px;
+}
+
+.pp {
+    width: 500px;
+}
+
+.a {
+    width: 500px;
+}
+
+.texto_prancha{
+    max-width: 500px;
+    font-size: 1.45rem;
+    color: black;
+    line-height: 1.4;
+}
+
+
+.texto_prancha h2{
+    font-size: 2.2rem;
+    color: #01579b;
+}
+
+.texto_prancha b{
+color: #0288d1;
+}
+.quiz {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.quiz h1 {
+    font-size: 3rem;
+    color: #03a9f4;
+    font-weight: bold;
+}
+
+.quiz p{
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #03a9f4;
+}
+
+.quiz img {
+    width: 50%;
+    border: 7px solid #0288d1;
+}
+
+.quiz button {
+    background-color: #03a9f4;
+    color: white;
+    border-radius: 7px;
+    font-size: 1.4rem;
+    padding: 10px;
+    font-weight: 900;
+    margin-top: 30px;
+    transition: 0.3s;
+    margin-bottom: 50px;
+}
+
+.quiz button:hover {
+    color: #b3e5fc;
+    padding: 12px;
+}
+
+

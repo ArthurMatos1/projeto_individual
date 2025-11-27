@@ -34,7 +34,7 @@
             </div>
             <div class="conjunto">
                 <div class="texto">
-                    <p>Olá <b id="puxar"></b>, Seja Bem-vindo!</p>
+                    <p>Olá, <b id="puxar"></b>, Seja Bem-vindo!</p>
                 </div>
 
                 <div class="kpi">
@@ -51,10 +51,6 @@
                                 Prancha com maior<br>resultado<br> dos usuários
                             </h3>
                             <p id="paragrafo2">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                Incidunt voluptas voluptatum nobis vel molestias laudantium odit fuga odio,
-                                reprehenderit labore beatae tempore ipsum sint magnam quasi!
-                                Mollitia voluptates qui saepe?
                             </p>
                         </div>
 
@@ -166,7 +162,7 @@
                             scales: {
                                 y: {
                                     beginAtZero: true,
-                                    title: { display: true, text: 'Quantidade de resultados' },
+                                    title: { display: true, text: 'Nível de proximidade %' },
                                 }
                             }
                         }
@@ -284,7 +280,7 @@
                     let vencedor = 0
 
                     resposta.forEach(item => {
-                        vencedor = item.pranchaVencedora  
+                        vencedor = item.prancha 
                     });
 
                     paragrafo2.innerHTML = vencedor

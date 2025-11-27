@@ -23,7 +23,7 @@
             <a href="index.html">
                 <p>Início</p>
             </a>
-            <a href="quiz.html">
+            <a href="sobrequiz.html">
                 <p>Quiz</p>
             </a>
             <a href="sobremim.html">
@@ -65,7 +65,8 @@
             <div class="botao c">
                 <button onclick="verificarTentativas()" class="botao">Entrar</button>
             </div>
-            <div id="msg" class="mensagem"></div>
+            <div id="msg" style="font-size: 1.0rem; color: green; text-align: center;"></div>
+            <div id="msg2" style="font-size: 1.0rem; color: red;"></div>
         </div>
     </div>
     <footer class="rodape">
@@ -108,7 +109,7 @@
 
         if (emailVar == "" || senhaVar == "") {
             //cardErro.style.display = "block"
-            msg.innerHTML = "Erro! Verifique se os campos acima foram preenchidos corretamente";
+            msg2.innerHTML = "Erro! Verifique se os campos acima foram preenchidos corretamente";
             //finalizarAguardar();
             return false;
         }
@@ -142,15 +143,19 @@
                     
 
                     setTimeout(function () {
-                        alert('Login executado com sucesso!')
-                        window.location = "quiz.html";
+                        msg.innerHTML = 'Login executado com sucesso!'
                     }, 1000); // apenas para exibir o loading
+
+                    setTimeout(function (){
+                    alert('Redirecionando para o quiz...')
+                    window.location = "quiz.html";
+                    }, 2000)
 
                 });
 
             } else {
 
-                console.log("Houve um erro ao tentar realizar o login!");
+                alert("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
                     console.error(texto);

@@ -11,7 +11,7 @@
 
 <body>
     <div class="imagem">
-        <a href="../public/index.html">
+        <a href="./index.html">
             <img src="./assets/imgs/logo.png" alt="">
         </a>
     </div>
@@ -183,129 +183,142 @@
         const containerResultado = document.getElementById("resultado");
         const botaoIniciar = document.getElementById("btIniciar");
 
-        function iniciarQuiz() {
-            botaoIniciar.style.display = "none";
-            quizPai.style.display = "block";
-            carregarPergunta();
-        }
+    function iniciarQuiz() {
+    botaoIniciar.style.display = "none";
+    quizPai.style.display = "block";
+    carregarPergunta();
+}
 
-        function carregarPergunta() {
-            const q = perguntas[perguntaAtual];
+function carregarPergunta() {
+    const q = perguntas[perguntaAtual];
 
-            infoQuestao.textContent = `Pergunta ${perguntaAtual + 1} de ${perguntas.length}`;
-            textoPergunta.textContent = q.pergunta;
+    infoQuestao.textContent = `Pergunta ${perguntaAtual + 1} de ${perguntas.length}`;
+    textoPergunta.textContent = q.pergunta;
 
-            containerOpcoes.innerHTML = "";
+    containerOpcoes.innerHTML = "";
 
-            q.opcoes.forEach((opcao, index) => {
-                const div = document.createElement("div");
-                div.className = "opcao";
+    q.opcoes.forEach((opcao, index) => {
+        const div = document.createElement("div");
+        div.className = "opcao";
 
-                const input = document.createElement("input");
-                input.type = "radio";
-                input.name = "opcao";
-                input.value = index;
-                input.checked = respostasUsuario[perguntaAtual] == index;
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "opcao";
+        input.value = index;
+        input.checked = respostasUsuario[perguntaAtual] == index;
 
-                const label = document.createElement("label");
-                label.textContent = opcao;
+        const label = document.createElement("label");
+        label.textContent = opcao;
 
-                div.appendChild(input);
-                div.appendChild(label);
-                containerOpcoes.appendChild(div);
-            });
+        div.appendChild(input);
+        div.appendChild(label);
+        containerOpcoes.appendChild(div);
+    });
 
-            botaoVoltar.style.display = perguntaAtual === 0 ? "none" : "inline-block";
-            botaoAvancar.textContent = (perguntaAtual === perguntas.length - 1) ? "Finalizar" : "Avançar";
-        }
+    botaoVoltar.style.display = perguntaAtual === 0 ? "none" : "inline-block";
+    botaoAvancar.textContent = (perguntaAtual === perguntas.length - 1) ? "Finalizar" : "Avançar";
+}
 
 
-        function avancar() {
-            const selecionada = document.querySelector("input[name='opcao']:checked");
+function avancar() {
+    const selecionada = document.querySelector("input[name='opcao']:checked");
 
-            if (!selecionada) {
-                alert("Selecione uma opção!");
-                return;
+    if (!selecionada) {
+        alert("Selecione uma opção!");
+        return;
+    }
 
-            }
+    respostasUsuario[perguntaAtual] = Number(selecionada.value);
 
-            respostasUsuario[perguntaAtual] = Number(selecionada.value);
+    if (perguntaAtual < perguntas.length - 1) {
+        perguntaAtual++;
+        carregarPergunta();
+    } else {
+        calcularResultado();
+    }
+}
 
-            if (perguntaAtual < perguntas.length - 1) {
-                perguntaAtual++;
-                carregarPergunta();
+function voltar() {
+    if (perguntaAtual > 0) {
+        perguntaAtual--;
+        carregarPergunta();
+    }
+}
+
+//  Zera as propriedades da 'pontuacao'
+function calcularResultado() {
+    pontuacao.longboard = 0;
+    pontuacao.funboard = 0;
+    pontuacao.shortboard = 0;
+    pontuacao.fish = 0;
+    pontuacao.gun = 0;
+
+    // Calcula a pontuação
+    perguntas.forEach((p, index) => {
+        const opcaoEscolhida = respostasUsuario[index];
+        const tipoPrancha = p.pontos[opcaoEscolhida];
+        pontuacao[tipoPrancha]++;
+    });
+
+    // Envia os dados
+    fetch("/usuarios/pergunta", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            longboardServer: pontuacao.longboard,
+            funboardServer: pontuacao.funboard,
+            shortboardServer: pontuacao.shortboard,
+            fishboardServer: pontuacao.fish,
+            gunServer: pontuacao.gun,
+            idServer: sessionStorage.ID_USUARIO
+        }),
+    })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+
             } else {
-                calcularResultado();
+                throw "Houve um erro ao tentar realizar o cadastro!";
             }
-        }
-
-        function voltar() {
-            if (perguntaAtual > 0) {
-                perguntaAtual--;
-                carregarPergunta();
-            }
-        }
-
-        function calcularResultado() {
-            for (let p in pontuacao) pontuacao[p] = 0;
-
-            perguntas.forEach((p, index) => {
-                const opcaoEscolhida = respostasUsuario[index];
-                const tipoPrancha = p.pontos[opcaoEscolhida];
-                pontuacao[tipoPrancha]++;
-            });
-
-            fetch("/usuarios/pergunta", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    // crie um atributo que recebe o valor recuperado aqui
-                    // Agora vá para o arquivo routes/usuario.js
-                    longboardServer: pontuacao.longboard,
-                    funboardServer: pontuacao.funboard,
-                    shortboardServer: pontuacao.shortboard,
-                    fishboardServer: pontuacao.fish,
-                    gunServer: pontuacao.gun,
-                    idServer: sessionStorage.ID_USUARIO
-                    //idEmpresaVincularServer: idEmpresaVincular
-                }),
-            })
-                .then(function (resposta) {
-                    console.log("resposta: ", resposta);
-
-                    if (resposta.ok) {
-
-                    } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
-                    }
-                })
-                .catch(function (resposta) {
-                    console.log(`#ERRO: ${resposta}`);
-                });
-
-            let resultadoFinal = Object.keys(pontuacao).reduce((a, b) =>
-                pontuacao[a] > pontuacao[b] ? a : b
-            );
-
-            mostrarResultado(resultadoFinal);
-        }
-
-        function mostrarResultado(prancha) {
-            quizPai.style.display = "none";
-            containerResultado.style.display = "block";
-
-            containerResultado.innerHTML = `
-                <h2>${pranchas[prancha].nome}</h2>
-                <img src="${pranchas[prancha].img}" width="300">
-                <p>${pranchas[prancha].mensagem}</p>
-                <button onclick="location.reload()" style="padding: 10px 20px; background:#0044aa; border: none; color:white; border-radius:8px;">Recomeçar</button>
-                <a href="./dashboard/dashboard.html" style="padding: 10px 10px; background:#0044aa; border: none; color: white; border-radius:8px;"> Ver dashboard</a>`;
-        }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
 
 
+    let resultadoFinal = 'longboard'; 
 
+    if (pontuacao.funboard > pontuacao[resultadoFinal]) {
+        resultadoFinal = 'funboard';
+    }
+    if (pontuacao.shortboard > pontuacao[resultadoFinal]) {
+        resultadoFinal = 'shortboard';
+    }
+    if (pontuacao.fish > pontuacao[resultadoFinal]) {
+        resultadoFinal = 'fish';
+    }
+    if (pontuacao.gun > pontuacao[resultadoFinal]) {
+        resultadoFinal = 'gun';
+    }
+
+    mostrarResultado(resultadoFinal);
+}
+
+
+function mostrarResultado(prancha) {
+    quizPai.style.display = "none";
+    containerResultado.style.display = "block";
+
+    containerResultado.innerHTML = `
+        <h2>${pranchas[prancha].nome}</h2>
+        <img src="${pranchas[prancha].img}" width="300">
+        <p>${pranchas[prancha].mensagem}</p>
+        <button onclick="location.reload()" style="padding: 10px 20px; background:#0044aa; border: none; color:white; border-radius:8px;">Recomeçar</button>
+        <a href="./dashboard/dashboard.html" style="padding: 10px 10px; background:#0044aa; border: none; color: white; border-radius:8px;"> Ver dashboard</a>`;
+}
     </script>
 
 </body>

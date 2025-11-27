@@ -22,7 +22,7 @@
       <a href="index.html">
         <p>Início</p>
       </a>
-      <a href="">
+      <a href="sobrequiz.html">
         <p>Quiz</p>
       </a>
       <a href="sobremim.html">
@@ -48,7 +48,7 @@
 
       <h2>Criar Conta</h2>
 
-      <input type="text" placeholder="Nome" id="iptNome">
+      <input type="text" placeholder="Nome Completo" id="iptNome">
       <div id="msg2"></div>
       <input type="email" placeholder="Insira seu Email" id="iptEmail">
       <div id="msg3"></div>
@@ -144,7 +144,7 @@
     } else if(!(emailVar.includes('.'))){
       msg3.innerHTML = `O campo E-mail deve conter .`
     }
-
+    else{
     /*else {
       setInterval(sumirMensagem, 5000);
     }*/
@@ -195,7 +195,9 @@
         //finalizarAguardar();
       });
 
+
     return false;
+    }
   }
 
   // Listando empresas cadastradas 
