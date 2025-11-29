@@ -120,18 +120,56 @@ SELECT
     -- --
     CREATE VIEW vwGraficoPolar AS
     
-    SELECT
-    ROUND(longboard  / 9 * 100, 0) 
-    AS Longboard,
-    ROUND(funboard / 9 * 100, 0) 
-    AS Funboard,
-    ROUND(shortboard / 9 * 100, 0) 
-    AS Shortboard,
-    ROUND(fishboard  / 9 * 100, 0) 
-    AS Fishboard,
-    ROUND(gunboard   / 9 * 100, 0) 
-    AS Gunboard
-FROM caracteristica;
+     SELECT 
+    ROUND(
+        (SELECT COUNT(*) 
+        FROM caracteristica 
+        WHERE longboard > funboard 
+        AND longboard > shortboard 
+        AND longboard > gunboard 
+        AND longboard > fishboard)
+        / (SELECT COUNT(*) FROM caracteristica) * 100
+    , 0) AS Longboard,
+
+    ROUND(
+        (SELECT COUNT(*) 
+        FROM caracteristica
+        WHERE funboard > longboard 
+        AND funboard > shortboard 
+        AND funboard > gunboard 
+        AND funboard > fishboard)
+        / (SELECT COUNT(*) FROM caracteristica) * 100
+    , 0) AS Funboard,
+
+    ROUND(
+        (SELECT COUNT(*) 
+        FROM caracteristica 
+        WHERE shortboard > longboard 
+        AND shortboard > funboard 
+        AND shortboard > fishboard 
+        AND shortboard > gunboard)
+        / (SELECT COUNT(*) FROM caracteristica) * 100
+    , 0) AS Shortboard,
+
+    ROUND(
+        (SELECT COUNT(*) 
+        FROM caracteristica 
+        WHERE fishboard > longboard 
+        AND fishboard > funboard 
+        AND fishboard > gunboard 
+        AND fishboard > shortboard)
+        / (SELECT COUNT(*) FROM caracteristica) * 100
+    , 0) AS Fishboard,
+
+    ROUND(
+        (SELECT COUNT(*) 
+        FROM caracteristica 
+        WHERE gunboard > longboard 
+        AND gunboard > fishboard 
+        AND gunboard > shortboard 
+        AND gunboard > funboard)
+        / (SELECT COUNT(*) FROM caracteristica) * 100
+    , 0) AS Gunboard;
 
 SELECT * FROM vwGraficoPolar;
 
@@ -178,64 +216,67 @@ SELECT
         -- kpi 2
         
         ALTER VIEW vwKpi2 AS 
-       SELECT 
+      SELECT 
     CASE
-        WHEN longboard_v >= funboard_v
-         AND longboard_v >= shortboard_v
-         AND longboard_v >= fishboard_v
-         AND longboard_v >= gunboard_v THEN 'Longboard'
+        WHEN longboard >= shortboard 
+         AND longboard >= funboard 
+         AND longboard >= gunboard 
+         AND longboard >= fishboard 
+            THEN Longboard
 
-        WHEN funboard_v >= longboard_v
-         AND funboard_v >= shortboard_v
-         AND funboard_v >= fishboard_v
-         AND funboard_v >= gunboard_v THEN 'Funboard'
+        WHEN shortboard >= longboard
+         AND shortboard >= funboard
+         AND shortboard >= fishboard
+         AND shortboard >= gunboard
+            THEN Shortboard
 
-        WHEN shortboard_v >= longboard_v
-         AND shortboard_v >= funboard_v
-         AND shortboard_v >= fishboard_v
-         AND shortboard_v >= gunboard_v THEN 'Shortboard'
+        WHEN funboard >= longboard
+         AND funboard >= shortboard
+         AND funboard >= fishboard
+         AND funboard >= gunboard
+            THEN Funboard
 
-        WHEN fishboard_v >= longboard_v
-         AND fishboard_v >= funboard_v
-         AND fishboard_v >= shortboard_v
-         AND fishboard_v >= gunboard_v THEN 'Fishboard'
+        WHEN fishboard >= longboard
+         AND fishboard >= funboard
+         AND fishboard >= shortboard
+         AND fishboard >= gunboard
+            THEN Fishboard
+
+        ELSE gunboard
+    END AS MaiorValor,
+
+    CASE
+         WHEN longboard >= shortboard 
+         AND longboard >= funboard 
+         AND longboard >= gunboard 
+         AND longboard >= fishboard 
+            THEN 'Longboard'
+
+         WHEN shortboard >= longboard
+         AND shortboard >= funboard
+         AND shortboard >= fishboard
+         AND shortboard >= gunboard
+            THEN 'Shortboard'
+
+         WHEN funboard >= longboard
+         AND funboard >= shortboard
+         AND funboard >= fishboard
+         AND funboard >= gunboard
+            THEN 'Funboard'
+
+        WHEN fishboard >= longboard
+         AND fishboard >= funboard
+         AND fishboard >= shortboard
+         AND fishboard >= gunboard
+            THEN 'Fishboard'
 
         ELSE 'Gunboard'
-    END AS prancha
-FROM (
-    SELECT
-        (SELECT COUNT(*) FROM caracteristica
-         WHERE longboard >= funboard
-           AND longboard >= shortboard
-           AND longboard >= fishboard
-           AND longboard >= gunboard) AS longboard_v,
+    END AS Prancha
 
-        (SELECT COUNT(*) FROM caracteristica
-         WHERE funboard >= longboard
-           AND funboard >= shortboard
-           AND funboard >= fishboard
-           AND funboard >= gunboard) AS funboard_v,
-
-        (SELECT COUNT(*) FROM caracteristica
-         WHERE shortboard >= longboard
-           AND shortboard >= funboard
-           AND shortboard >= fishboard
-           AND shortboard >= gunboard) AS shortboard_v,
-
-        (SELECT COUNT(*) FROM caracteristica
-         WHERE fishboard >= longboard
-           AND fishboard >= funboard
-           AND fishboard >= shortboard
-           AND fishboard >= gunboard) AS fishboard_v,
-
-        (SELECT COUNT(*) FROM caracteristica
-         WHERE gunboard >= longboard
-           AND gunboard >= funboard
-           AND gunboard >= shortboard
-           AND gunboard >= fishboard) AS gunboard_v
-) AS v;
+FROM vwGraficoPolar;
                 
 		SELECT * FROM vwKpi2;
 	
+    select * from quiz;
 
 
