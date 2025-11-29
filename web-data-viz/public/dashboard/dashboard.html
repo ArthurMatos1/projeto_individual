@@ -78,6 +78,7 @@
 
     function graficoBarra() {
 
+        var fkUsuarioVar = sessionStorage.ID_USUARIO
 
         puxar.innerHTML = sessionStorage.NOME_USUARIO
 
@@ -85,7 +86,10 @@
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+                idServer: fkUsuarioVar,
+            }),
         }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
@@ -178,11 +182,16 @@
     }
 
     function graficoPolar() {
+        var fkusuarioVar = sessionStorage.ID_USUARIO
+
         fetch("/medidas/graficoPolar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+                idServer: fkusuarioVar,
+            }),
         }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
@@ -196,7 +205,7 @@
 
                     resposta.forEach(item => {
                         longboard = item.Longboard
-                        shortboard = item.shortboard
+                        shortboard = item.Shortboard
                         gunboard = item.Gunboard
                         fishboard = item.Fishboard
                         funboard = item.Funboard
@@ -210,11 +219,11 @@
                                 'Longboard',
                                 'Shortboard',
                                 'Gunboard',
-                                'Funboard',
-                                'Fishboard'
+                                'Fishboard',
+                                'Funboard'
                             ],
                             datasets: [{
-                                label: 'My First Dataset',
+                                label: 'Quantidade de Vezes',
                                 data: [longboard, shortboard, gunboard, fishboard, funboard],
                                 backgroundColor: [
                                     'red',
@@ -238,23 +247,26 @@
     }
 
     function kpi() {
+
+        var varfkUsuario = sessionStorage.ID_USUARIO
+        let pranchaNome = document.getElementById("paragrafo")
+
         fetch("/medidas/kpi", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+                idServer: varfkUsuario,
+            }),
         }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    let vencedor = 0
-
                     resposta.forEach(item => {
-                        vencedor = item.pranchaVencedora  
+                        pranchaNome.innerHTML = item.pranchaVencedora  
                     });
-
-                    paragrafo.innerHTML = vencedor
 
                 }) } else {
                     console.error(`O dado não foi encontrado!`)
@@ -267,23 +279,26 @@
 
         function kpi2(){  
         
+            var fkusuarioVar = sessionStorage.ID_USUARIO
+            let pranchaGlobal = document.getElementById("paragrafo2")
+
             fetch("/medidas/kpi2", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+                idServer: fkusuarioVar,
+            }),
         }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    let vencedor = 0
-
                     resposta.forEach(item => {
-                        vencedor = item.prancha 
+                        pranchaGlobal.innerHTML = item.Prancha 
                     });
 
-                    paragrafo2.innerHTML = vencedor
 
                 }) } else {
                     console.error(`O dado não foi encontrado!`)

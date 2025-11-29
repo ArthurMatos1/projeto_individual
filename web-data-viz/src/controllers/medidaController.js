@@ -3,7 +3,9 @@ var medidaModel = require("../models/medidaModel");
 
 function mostrarGrafico(req, res) {
 
-    medidaModel.mostrarGrafico().then(function (resultado) {
+    var fkusuario = req.body.idServer
+
+    medidaModel.mostrarGrafico(fkusuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -17,6 +19,7 @@ function mostrarGrafico(req, res) {
 }
 
 function graficoPolar(req, res) {
+
 
     medidaModel.graficoPolar().then(function (resultado) {
         if (resultado.length > 0) {
@@ -33,7 +36,9 @@ function graficoPolar(req, res) {
 
 function kpi(req, res) {
 
-    medidaModel.kpi().then(function (resultado) {
+    var fkusuario = req.body.idServer
+
+    medidaModel.kpi(fkusuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -48,7 +53,9 @@ function kpi(req, res) {
 
 function kpi2(req, res) {
 
-    medidaModel.kpi2().then(function (resultado) {
+        var fkusuario = req.body.idServer
+
+    medidaModel.kpi2(fkusuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

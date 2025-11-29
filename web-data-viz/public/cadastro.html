@@ -98,14 +98,8 @@
 
 <script>
 
-  // Array para armazenar empresas cadastradas para validação de código de ativação 
-  //let listaEmpresasCadastradas = [];
-
   function cadastrar() {
-    // aguardar();
 
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
     var nomeVar = iptNome.value;
     var emailVar = iptEmail.value;
     var senhaVar = iptSenha.value;
@@ -116,35 +110,43 @@
     msg3.innerHTML = ``
     msg4.innerHTML = ``
 
-    // Verificando se há algum campo em branco
-    if (
-      nomeVar == "" ||
-      emailVar == "" ||
-      senhaVar == "" ||
-      confirmacaoSenhaVar == "" 
-    ) {
-      msg.innerHTML =
-        "Erro! Verifique se os campos foram preenchidos corretamente";
-    } 
-    if(nomeVar == ''){
-      msg2.innerHTML = `Verifique se o nome foi preenchido!`
-    }
-    if(emailVar == ''){
-      msg3.innerHTML = `Verifique se o email foi preenchido!`
-    }
-    if(senhaVar == ''){
-      msg4.innerHTML = `Verifique se a senha foi preenchida!`
-    }
-    if(confirmacaoSenhaVar != senhaVar){
-      msg4.innerHTML = `Verifique se as senhas são as mesmas!`
-    }
+msg.innerHTML = ""
+msg2.innerHTML = ""
+msg3.innerHTML = ""
+msg4.innerHTML = ""
 
-    else if(!(emailVar.includes('@'))){
-      msg3.innerHTML = `O campo E-mail deve conter @`
-    } else if(!(emailVar.includes('.'))){
-      msg3.innerHTML = `O campo E-mail deve conter .`
-    }
-    else{
+let erro = false;
+
+if (nomeVar == "") {
+    msg2.innerHTML = "Verifique se o nome foi preenchido!";
+    erro = true;
+}
+if (emailVar == "") {
+    msg3.innerHTML = "Verifique se o email foi preenchido!";
+    erro = true;
+} else if (!emailVar.includes("@")) {
+    msg3.innerHTML = "O campo E-mail deve conter @";
+    erro = true;
+} else if (!emailVar.includes(".")) {
+    msg3.innerHTML = "O campo E-mail deve conter . (ponto)";
+    erro = true;
+}
+
+if (senhaVar == "") {
+    msg4.innerHTML = "Verifique se a senha foi preenchida!";
+    erro = true;
+} else if (confirmacaoSenhaVar == "") {
+    msg4.innerHTML = "Confirme sua senha!";
+    erro = true;
+} else if (senhaVar != confirmacaoSenhaVar) {
+    msg4.innerHTML = "As senhas não coincidem!";
+    erro = true;
+}
+
+if (erro) {
+    msg.innerHTML = "Erro! Verifique os campos destacados abaixo.";
+    return false; 
+} else{
     /*else {
       setInterval(sumirMensagem, 5000);
     }*/
