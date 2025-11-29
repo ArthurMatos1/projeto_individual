@@ -118,58 +118,39 @@ SELECT
 	SELECT * FROM vwgraficoBarra;
     
     -- --
-    CREATE VIEW vwGraficoPolar AS
+    ALTER VIEW vwGraficoPolar AS
     
-     SELECT 
-    ROUND(
-        (SELECT COUNT(*) 
-        FROM caracteristica 
-        WHERE longboard > funboard 
-        AND longboard > shortboard 
-        AND longboard > gunboard 
-        AND longboard > fishboard)
-        / (SELECT COUNT(*) FROM caracteristica) * 100
-    , 0) AS Longboard,
+   SELECT
+    ROUND(SUM(CASE WHEN longboard > funboard 
+    AND longboard > shortboard 
+    AND longboard > gunboard 
+    AND longboard > fishboard THEN 1 ELSE 0 END) * 100.0 
+    / COUNT(*), 0) AS Longboard,
 
-    ROUND(
-        (SELECT COUNT(*) 
-        FROM caracteristica
-        WHERE funboard > longboard 
-        AND funboard > shortboard 
-        AND funboard > gunboard 
-        AND funboard > fishboard)
-        / (SELECT COUNT(*) FROM caracteristica) * 100
-    , 0) AS Funboard,
+    ROUND(SUM(CASE WHEN funboard > longboard 
+    AND funboard > shortboard 
+    AND funboard > gunboard 
+    AND funboard > fishboard THEN 1 ELSE 0 END) * 100.0 
+    / COUNT(*), 0) AS Funboard,
 
-    ROUND(
-        (SELECT COUNT(*) 
-        FROM caracteristica 
-        WHERE shortboard > longboard 
-        AND shortboard > funboard 
-        AND shortboard > fishboard 
-        AND shortboard > gunboard)
-        / (SELECT COUNT(*) FROM caracteristica) * 100
-    , 0) AS Shortboard,
-
-    ROUND(
-        (SELECT COUNT(*) 
-        FROM caracteristica 
-        WHERE fishboard > longboard 
-        AND fishboard > funboard 
-        AND fishboard > gunboard 
-        AND fishboard > shortboard)
-        / (SELECT COUNT(*) FROM caracteristica) * 100
-    , 0) AS Fishboard,
-
-    ROUND(
-        (SELECT COUNT(*) 
-        FROM caracteristica 
-        WHERE gunboard > longboard 
-        AND gunboard > fishboard 
-        AND gunboard > shortboard 
-        AND gunboard > funboard)
-        / (SELECT COUNT(*) FROM caracteristica) * 100
-    , 0) AS Gunboard;
+    ROUND(SUM(CASE WHEN shortboard > longboard 
+    AND shortboard > funboard 
+    AND shortboard > fishboard 
+    AND shortboard > gunboard THEN 1 ELSE 0 END) * 100.0 
+    / COUNT(*), 0) AS Shortboard,
+    
+    ROUND(SUM(CASE WHEN fishboard > longboard 
+    AND fishboard > funboard 
+    AND fishboard > gunboard 
+    AND fishboard > shortboard THEN 1 ELSE 0 END) * 100.0 
+    / COUNT(*), 0) AS Fishboard,
+    
+    ROUND(SUM(CASE WHEN gunboard > longboard 
+    AND gunboard > fishboard 
+    AND gunboard > shortboard 
+    AND gunboard > funboard THEN 1 ELSE 0 END) * 100.0 
+    / COUNT(*), 0) AS Gunboard
+FROM caracteristica;
 
 SELECT * FROM vwGraficoPolar;
 
